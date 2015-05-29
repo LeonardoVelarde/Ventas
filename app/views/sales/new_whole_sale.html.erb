@@ -1,0 +1,31 @@
+<div class="container">
+
+  <%= form_tag('/whole/sale', method: 'post') do %>
+
+      <div class="field">
+        <h1 align="center">Client NIT</h1><br>
+        <%= text_field_tag :client_id, '' ,class: 'form-control' %>
+      </div>
+
+      <div class="actions" align="center">
+        <%= submit_tag 'Start Sale', {class: 'btn btn-lg bg-green'} %>
+        <a href="/" class="btn btn-lg bg-red">Cancel</a>
+      </div>
+  <% end %>
+
+  <table class="table table-bordered">
+    <tr>
+      <th>Name</th>
+      <th>NIT</th>
+      <th>Direction</th>
+    </tr>
+    <h2>Known clients:</h2>
+    <% @clients.each do |client| %>
+        <tr>
+          <td><%= client.name %></td>
+          <td><%= client.nit %></td>
+          <td><%= client.direction %></td>
+        </tr>
+    <% end %>
+  </table>
+</div>

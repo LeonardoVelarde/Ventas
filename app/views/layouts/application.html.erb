@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ventas</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<a href="/" class="btn btn-lg btn-default" style="margin-left: -7px"><i class="fa fa-fw fa-home"></i>Home</a>
+<%= link_to 'Clients', '/clients', class: 'btn btn-lg btn-default' %>
+<%= link_to 'Products', '/products', class: 'btn btn-lg btn-default' %>
+<%= link_to 'Sales', '/sales', class: 'btn btn-lg btn-default' %>
+
+<%= yield %>
+
+</body>
+</html>

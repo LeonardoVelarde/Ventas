@@ -1,0 +1,41 @@
+<div class="container">
+  <h1>Clients</h1>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Nit</th>
+      <th>Direction</th>
+      <th>Trusted</th>
+      <th colspan="4">Options</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @clients.each do |client| %>
+        <tr>
+          <td><%= client.name %></td>
+          <td><%= client.nit %></td>
+          <td><%= client.direction %></td>
+          <td><% if client.trusted %> Yes <% else %> No <% end %> </td>
+          <td>
+            <% if client.trusted %>
+                <%= link_to 'Untrust', '/untrust/client/' + client.id.to_s, class: 'btn btn-default bg-orange' %>
+            <% else %>
+                <%= link_to 'Trust', '/trust/client/' + client.id.to_s, class: 'btn btn-default bg-green' %>
+            <% end %>
+          </td>
+          <td><%= link_to 'Show', client, class: 'btn btn-default bg-blue' %></td>
+          <td><%= link_to 'Edit', edit_client_path(client), class: 'btn btn-default bg-blue' %></td>
+          <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn bg-red' %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Client', new_client_path, class: 'btn btn-default' %>
+
+</div>

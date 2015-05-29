@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Sales</h1>
+
+  <table class="box table table-bordered">
+    <thead class="box-header">
+    <tr>
+      <th>Client</th>
+      <th>Type name</th>
+      <th>Total price</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @sales.each do |sale| %>
+        <tr>
+          <td><%= sale.client.name %></td>
+          <td><%= sale.type_name %></td>
+          <td><%= sale.total_price %>$</td>
+          <td><%= link_to 'Show', sale, class: 'btn btn-default bg-blue' %></td>
+          <td><%= link_to 'Edit', edit_sale_path(sale), class: 'btn btn-default bg-blue' %></td>
+          <td><%= link_to 'Delete', sale, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default bg-red' %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+</div>
