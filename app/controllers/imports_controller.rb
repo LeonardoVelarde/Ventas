@@ -47,9 +47,12 @@ class ImportsController < ApplicationController
 
   def end_import
     import = Import.find(params[:id])
-    import.deliveries.each do |delivery|
-      current_amount = Product.find(delivery.product_id).amount
-      Product.find(delivery.product_id).update(amount: (current_amount + delivery.amount))
+    unless import.finished
+      import.update(finished: true)
+      import.deliveries.each do |delivery|
+        current_amount = Product.find(delivery.product_id).amount
+        Product.find(delivery.product_id).update(amount: (current_amount + delivery.amount))
+      end
     end
     redirect_to imports_path
   end
@@ -86,6 +89,6 @@ class ImportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def import_params
-      params.require(:import).permit(:provider, :total_price)
+      params.require(:import).permit(:provider, :total_price, :finished)
     end
 end
