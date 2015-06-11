@@ -17,14 +17,14 @@
             <tr>
               <td><%= offer.product.name %></td>
               <td><%= offer.amount %></td>
-              <td><%= offer.price %></td>
-              <td><%= offer.price * offer.amount %></td>
+              <td><%= offer.price %>$</td>
+              <td><%= offer.price * offer.amount %>$</td>
             </tr>
         <% end %>
   </table>
 
     <p>
-        <h3 style="display: inline; font-weight: bold">Total price:</h3>&nbsp;&nbsp;<text style="font-size: 20px"><%= @price %> $</text>
+        <h3 style="display: inline; font-weight: bold">Total price:</h3>&nbsp;&nbsp;<text style="font-size: 20px"><%= @price %>$</text>
     </p>
 
     <!--<%= link_to 'Edit', edit_sale_path(@sale) %>-->
@@ -32,39 +32,36 @@
 
   <% if !@sale.finished %>
       <br><br>
-      <%= form_tag('/offers', method: 'post') do %>
 
+      <%= form_tag('/offers', method: 'post') do %>
           <div class="field hidden">
             <%= text_field_tag :sale_id, @sale.id %>
-          </div>
-
-          <div class="field">
-            <strong>Product id:</strong>
-            <%= number_field_tag :product_id %>
-          </div>
-
-          <div class="field hidden">
             <%= text_field_tag :sale_type, @sale.type_name %>
           </div>
-
-          <div class="field">
-            <strong>Amount:</strong>
-            <%= number_field_tag :amount %>
-          </div>
-
-          <div class="actions">
-            <%= submit_tag 'Register Product', {class: 'btn btn-lg bg-green'} %>
-          </div>
+          <table>
+            <tr>
+              <th>Product ID</th>
+              <th>Amount</th>
+              <!--<th></th>-->
+            </tr>
+            <tr>
+              <td><%= text_field_tag :product_id %></td>
+              <td><%= text_field_tag :amount %></td>
+              <td><%= submit_tag 'Add Product', {class: 'btn btn-xs bg-green'} %></td>
+            </tr>
+          </table>
       <% end %>
 
+      <br><br>
 
       <%= link_to 'Finish sale', '/finish/sale/' + @sale.id.to_s ,{class: 'btn btn-lg bg-blue'} %>
       <%= link_to 'Cancel sale', '/sales/' + @sale.id.to_s, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-lg bg-red' %>
 
       <br><br>
       <%= form_tag('/sales/'+ @sale.id.to_s, :method => 'get') do %>
-          <%= text_field_tag(:c, '', { :class=>'form-control', :placeholder => 'Search', :style => 'width:90%; display:inline;' } ) %><%= submit_tag 'Search', {class: 'btn bg-blue'} %>
+          <%= text_field_tag(:c, '', { :class=>'form-control', :placeholder => 'Search', :style => 'width:20%; display:inline;' } ) %><%= submit_tag 'Search', {class: 'btn bg-blue'} %>
       <% end %>
+      <br>
 
       <table class="table table-bordered">
         <thead>
@@ -75,25 +72,31 @@
           <th>Description</th>
           <th>Whole sale price</th>
           <th>Retail price</th>
-          <!--<th>Amount</th>-->
-          <th colspan="3">Options</th>
+          <th>Amount</th>
+          <th></th>
         </tr>
         </thead>
 
         <tbody>
         <% @products.each do |product| %>
-            <tr>
-              <td><%= product.id %></td>
-              <td><%= product.name %></td>
-              <td><%= product.model %></td>
-              <td><%= product.description %></td>
-              <td><%= product.whole_sale_price %></td>
-              <td><%= product.retail_price %></td>
-              <!--<td><%= product.amount %></td>-->
-              <td><%= link_to 'Show', product, class: 'btn btn-default bg-blue' %></td>
-              <td><%= link_to 'Edit', edit_product_path(product), class: 'btn btn-default bg-blue' %></td>
-              <td><%= link_to 'Delete product', '/products/' + product.id.to_s, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn bg-red' %></td>
-            </tr>
+            <%= form_tag('/offers', method: 'post') do %>
+                <div class="field hidden">
+                  <%= text_field_tag :sale_id, @sale.id %>
+                  <%= number_field_tag :product_id, product.id %>
+                  <%= text_field_tag :sale_type, @sale.type_name %>
+                </div>
+
+                <tr>
+                  <td><%= product.id %></td>
+                  <td><%= product.name %></td>
+                  <td><%= product.model %></td>
+                  <td><%= product.description %></td>
+                  <td><%= product.whole_sale_price %>$</td>
+                  <td><%= product.retail_price %>$</td>
+                  <td><%= number_field_tag :amount %></td>
+                  <td><%= submit_tag 'Add Product', {class: 'btn bg-green'} %></td>
+                </tr>
+            <% end %>
         <% end %>
         </tbody>
       </table>

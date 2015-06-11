@@ -3,32 +3,34 @@
 
     <h1 align="center"><%= @product.name %></h1>
 
-  <p>
-    <strong>Model:</strong>
-    <%= @product.model %>
-  </p>
+  <div class="jumbotron">
+    <p>
+      <strong>Model:</strong>
+      <%= @product.model %>
+    </p>
 
-  <p>
-    <strong>Description:</strong>
-    <%= @product.description %>
-  </p>
+    <p>
+      <strong>Description:</strong>
+      <%= @product.description %>
+    </p>
 
-  <p>
-    <strong>Whole sale price:</strong>
-    <%= @product.whole_sale_price %>
-  </p>
+    <p>
+      <strong>Whole sale price:</strong>
+      <%= @product.whole_sale_price %>$
+    </p>
 
-  <p>
-    <strong>Retail price:</strong>
-    <%= @product.retail_price %>
-  </p>
+    <p>
+      <strong>Retail price:</strong>
+      <%= @product.retail_price %>$
+    </p>
 
-  <p>
-    <strong>Amount:</strong>
-    <%= @product.amount %>
-  </p>
+    <!--<p>-->
+      <!--<strong>Amount:</strong>-->
+      <!--<%= @product.amount %>-->
+    <!--</p>-->
+  </div>
 
-  <%= link_to 'Edit', edit_product_path(@product) %> |
-  <%= link_to 'Back', products_path %>
+  <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-default' %>
+  <%= link_to 'Back', products_path, class: 'btn btn-default' %>
 
 </div>

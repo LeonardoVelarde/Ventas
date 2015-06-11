@@ -29,6 +29,10 @@ class OffersController < ApplicationController
     @offer.sale_id = params[:sale_id]
     @offer.amount = params[:amount]
 
+    # product = Product.find(params[:product_id])
+    # current_amount = product.amount
+    # product.update(amount: (current_amount+params[:amount]))
+
     if params[:sale_type] == 'retail'
       @offer.price = Product.find(params[:product_id]).retail_price
     else

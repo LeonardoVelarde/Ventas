@@ -4,7 +4,7 @@ class SalesController < ApplicationController
   # GET /sales
   # GET /sales.json
   def index
-    @sales = Sale.all
+    @sales = Sale.all.includes(:client).order('clients.name')
   end
 
   # GET /sales/1
@@ -34,12 +34,16 @@ class SalesController < ApplicationController
   end
 
   def new_whole_sale
-    @clients = Client.all
+    @clients = Client.all.order
     @sale = Sale.new
   end
 
   def end_sale
     sale = Sale.find(params[:id])
+    sale.offers.each do |offer|
+      current_amount = Product.find(offer.product_id).amount
+      Product.find(offer.product_id).update(amount: (current_amount - offer.amount))
+    end
     sale.update({finished: true})
     redirect_to sales_path
   end

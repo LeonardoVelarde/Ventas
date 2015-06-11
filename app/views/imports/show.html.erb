@@ -1,0 +1,73 @@
+
+<p>
+  <strong>Provider:</strong>
+  <%= @import.provider %>
+</p>
+
+<h3>Delivery list</h3>
+<table class="table table-bordered">
+  <tr>
+    <th>Product</th>
+    <th>Amount</th>
+    <th>Price per unit</th>
+    <th>Total price</th>
+  </tr>
+  <% @deliveries.each do |delivery| %>
+      <br>
+      <tr>
+        <td><%= delivery.product.name %></td>
+        <td><%= delivery.amount %></td>
+        <td><%= delivery.price %>$</td>
+        <td><%= delivery.price * delivery.amount %>$</td>
+      </tr>
+  <% end %>
+</table>
+
+<p>
+  <strong>Total price:</strong>
+  <%= @import.total_price %>
+</p>
+
+<br>
+<%= link_to 'Finish import', '/finish/import/' + @import.id.to_s ,{class: 'btn btn-lg bg-blue'} %>
+<br><br>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Model</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Amount</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @products.each do |product| %>
+
+      <%= form_tag('/deliveries', method: 'post') do %>
+          <div class="field hidden">
+            <%= text_field_tag :product_id, product.id %>
+            <%= text_field_tag :import_id, @import.id %>
+          </div>
+          <tr>
+            <td><%= product.id %></td>
+            <td><%= product.name %></td>
+            <td><%= product.model %></td>
+            <td><%= product.description %></td>
+            <td><%= number_field_tag :price %></td>
+            <td><%= number_field_tag :amount %></td>
+            <td><%= submit_tag 'Add Product', {class: 'btn bg-green'} %></td>
+          </tr>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+
+
+<%= link_to 'Edit', edit_import_path(@import) %> |
+<%= link_to 'Back', imports_path %>

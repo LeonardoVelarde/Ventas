@@ -1,24 +1,30 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @client.name %>
-</p>
+    <h1 align="center"><%= @client.name %></h1>
 
-<p>
-  <strong>Nit:</strong>
-  <%= @client.nit %>
-</p>
+  <div class="jumbotron">
+    <p>
+      <strong>Nit:</strong>
+      <%= @client.nit %>
+    </p>
 
-<p>
-  <strong>Direction:</strong>
-  <%= @client.direction %>
-</p>
+    <br><br>
 
-<p>
-  <strong>Trusted:</strong>
-  <%= @client.trusted %>
-</p>
+    <p>
+      <strong>Direction:</strong>
+      <%= @client.direction %>
+    </p>
 
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
+    <br><br>
+
+    <p>
+      <strong>Trusted costumer:</strong>
+      <% if !@client.trusted %>No<% else %>Yes<% end %>
+    </p>
+  </div>
+
+  <%= link_to 'Edit', edit_client_path(@client), class: 'btn btn-default' %>
+  <%= link_to 'Back', clients_path, class: 'btn btn-default' %>
+
+</div>

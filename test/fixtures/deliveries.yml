@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  import_id: 
+  product_id: 
+  price: 1.5
+  amount: 1
+
+two:
+  import_id: 
+  product_id: 
+  price: 1.5
+  amount: 1

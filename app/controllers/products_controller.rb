@@ -41,6 +41,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def add_items
+  end
+
+  def substract_item
+  end
+
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update

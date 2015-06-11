@@ -11,13 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150529120046) do
+ActiveRecord::Schema.define(version: 20150611145541) do
 
   create_table "clients", force: true do |t|
     t.string   "name"
     t.string   "nit"
     t.string   "direction"
     t.boolean  "trusted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "deliveries", force: true do |t|
+    t.integer  "import_id"
+    t.integer  "product_id"
+    t.float    "price"
+    t.integer  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "deliveries", ["import_id"], name: "index_deliveries_on_import_id"
+  add_index "deliveries", ["product_id"], name: "index_deliveries_on_product_id"
+
+  create_table "imports", force: true do |t|
+    t.string   "provider"
+    t.float    "total_price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

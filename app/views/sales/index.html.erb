@@ -7,7 +7,8 @@
       <th>Client</th>
       <th>Type name</th>
       <th>Total price</th>
-      <th colspan="3"></th>
+      <th>Finished</th>
+      <th width="20%">Options</th>
     </tr>
     </thead>
 
@@ -17,9 +18,9 @@
           <td><%= sale.client.name %></td>
           <td><%= sale.type_name %></td>
           <td><%= sale.total_price %>$</td>
-          <td><%= link_to 'Show', sale, class: 'btn btn-default bg-blue' %></td>
-          <td><%= link_to 'Edit', edit_sale_path(sale), class: 'btn btn-default bg-blue' %></td>
-          <td><%= link_to 'Delete', sale, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default bg-red' %></td>
+          <td><% if sale.finished %>Yes<% else %>No<% end %></td>
+          <td><%= link_to (if sale.finished then 'Show' else 'Continue' end), sale, {class: 'btn btn-default bg-blue', style: 'min-width:100px;'} %>
+          <%= link_to (if sale.finished then 'Delete' else 'Cancel' end), sale, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default bg-red', style: 'min-width:100px;' %></td>
         </tr>
     <% end %>
     </tbody>

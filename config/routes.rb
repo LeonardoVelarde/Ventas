@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :deliveries
+
+  resources :imports
+
   resources :clients
 
   resources :offers
@@ -12,6 +16,7 @@ Rails.application.routes.draw do
   get 'finish/sale/:id' => 'sales#end_sale'
   get 'trust/client/:id' => 'clients#trust'
   get 'untrust/client/:id' => 'clients#untrust'
+  get '/finish/import/:id' => 'imports#end_import'
 
   post '/retail/sale' => 'sales#retail_sale'
   post '/whole/sale' => 'sales#whole_sale'
