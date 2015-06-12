@@ -29,6 +29,7 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(product_params)
+    @product.amount = 0;
 
     respond_to do |format|
       if @product.save
@@ -39,12 +40,6 @@ class ProductsController < ApplicationController
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def add_items
-  end
-
-  def substract_item
   end
 
   # PATCH/PUT /products/1

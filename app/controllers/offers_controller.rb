@@ -27,20 +27,25 @@ class OffersController < ApplicationController
     @offer = Offer.new
     @offer.product_id = params[:product_id]
     @offer.sale_id = params[:sale_id]
-    @offer.amount = params[:amount]
-
-    # product = Product.find(params[:product_id])
-    # current_amount = product.amount
-    # product.update(amount: (current_amount+params[:amount]))
-
-    if params[:sale_type] == 'retail'
-      @offer.price = Product.find(params[:product_id]).retail_price
+    # @offer.amount =
+    if params[:amount].to_i > Product.find(params[:product_id]).amount
+      redirect_to @offer.sale, notice: 'There is insufficient inventory of ' + @offer.product.name + ' to complete that offer.'
     else
-      @offer.price = Product.find(params[:product_id]).whole_sale_price
-    end
-    @offer.save
+      @offer.amount = params[:amount]
+      # product = Product.find(params[:product_id])
+      # current_amount = product.amount
+      # product.update(amount: (current_amount+params[:amount]))
 
-    redirect_to :back
+      if params[:sale_type] == 'retail'
+        @offer.price = Product.find(params[:product_id]).retail_price
+      else
+        @offer.price = Product.find(params[:product_id]).whole_sale_price
+      end
+      @offer.save
+
+      redirect_to :back
+    end
+
 
     # respond_to do |format|
     #   if @offer.save

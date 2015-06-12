@@ -1,7 +1,7 @@
 
 <div class="container" align="left">
     <p>
-        <h1><strong>Client:</strong> <%= @sale.client.name %></h1>
+        <h1><strong>Client:</strong> <%=  @sale.client ? @sale.client.name : 'n/a' %></h1>
     </p>
 
   <h3>Product list</h3>
@@ -63,6 +63,8 @@
       <% end %>
       <br>
 
+      <p id="notice"><%= notice %></p>
+
       <table class="table table-bordered">
         <thead>
         <tr>
@@ -72,6 +74,7 @@
           <th>Description</th>
           <th>Whole sale price</th>
           <th>Retail price</th>
+          <th>Stock</th>
           <th>Amount</th>
           <th></th>
         </tr>
@@ -93,6 +96,7 @@
                   <td><%= product.description %></td>
                   <td><%= product.whole_sale_price %>$</td>
                   <td><%= product.retail_price %>$</td>
+                  <td><%= product.amount %></td>
                   <td><%= number_field_tag :amount %></td>
                   <td><%= submit_tag 'Add Product', {class: 'btn bg-green'} %></td>
                 </tr>

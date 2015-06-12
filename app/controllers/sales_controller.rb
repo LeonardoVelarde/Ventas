@@ -34,7 +34,7 @@ class SalesController < ApplicationController
   end
 
   def new_whole_sale
-    @clients = Client.all.order
+    @clients = Client.all
     @sale = Sale.new
   end
 
