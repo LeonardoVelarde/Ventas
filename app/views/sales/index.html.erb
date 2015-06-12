@@ -15,7 +15,7 @@
     <tbody>
     <% @sales.each do |sale| %>
         <tr>
-          <td><%=  @sale.client ? @sale.client.name : 'n/a' %></td>
+          <td><%=  sale.client ? sale.client.name : 'n/a' %></td>
           <td><%= sale.type_name %></td>
           <td><%= sale.total_price %>$</td>
           <td><% if sale.finished %>Yes<% else %>No<% end %></td>
