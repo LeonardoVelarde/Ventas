@@ -49,3 +49,4 @@ group :production do
 end
 
 gem 'adminlte-rails'
+gem 'realtime-validations'

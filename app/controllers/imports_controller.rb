@@ -33,7 +33,7 @@ class ImportsController < ApplicationController
   # POST /imports.json
   def create
     @import = Import.new(import_params)
-
+    @import.finished = false
     respond_to do |format|
       if @import.save
         format.html { redirect_to @import, notice: 'Import was successfully created.' }
